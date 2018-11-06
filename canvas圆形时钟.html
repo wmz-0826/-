@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<style>
+		#mycan{border: 1px solid #0000FF;}
+	</style>
+	<body>
+		<canvas id="mycan" width="1000px" height="400px"></canvas>
+	</body>
+	<script>
+		var mycan=document.getElementById("mycan")
+		var contex=mycan.getContext("2d")
+		/* arc(x,y,r,start,end,false) */
+			/* var time=0
+			var y=0
+			time=setInterval(function(){
+				y++
+				contex.beginPath()
+				contex.moveTo(200,200)
+				contex.arc(200,200,100,0,(y/60)*2*Math.PI,false)
+				contex.closePath()
+				contex.stroke()
+				contex.strokeStyle="red"
+				if(y==60){
+					clearInterval(time)
+				}
+			},100) */
+			
+	//	分刻度
+	var timer = setInterval(function(){
+		contex.clearRect(0,0,200,200)
+		for(var i=1;i<61;i++){
+			contex.moveTo(200,200)
+			contex.lineWidth="1"
+			contex.arc(200,200,100,i/60*Math.PI*2,((i+1)/60)*2*Math.PI,false)
+			contex.strokeStyle="#999999"
+			contex.stroke()
+		}
+		
+		contex.closePath()
+		contex.beginPath()
+		contex.arc(200,200,95,0,2*Math.PI,false)
+		contex.fillStyle="white"
+		contex.fill()
+			
+		//时刻度
+		for(var i=1;i<13;i++){
+			contex.beginPath()
+			contex.moveTo(200,200)
+			contex.lineWidth="1"
+			contex.arc(200,200,100,i/12*Math.PI*2,((i+1)/12)*2*Math.PI,false)
+			contex.strokeStyle="red"
+			contex.stroke()
+		}
+		
+		contex.closePath()
+		contex.beginPath()
+		contex.arc(200,200,90,0,2*Math.PI,false)
+		contex.fillStyle="white"
+		contex.fill()
+		
+		
+		//获取时间对象
+		var time1=new Date()
+		var h = time1.getHours();
+		var m = time1.getMinutes();
+		var s = time1.getSeconds();
+		
+		//秒针
+		var os = s/60*Math.PI*2-0.5*Math.PI;
+		contex.beginPath();
+		contex.moveTo(200,200);
+		contex.arc(200,200,75,os,os,false);
+		contex.lineWidth = 2;
+		contex.strokeStyle = 'aqua';
+		contex.stroke();
+		
+		//分针
+		var om = m/60*Math.PI*2-0.5*Math.PI+s/60*Math.PI*2/60;
+		contex.beginPath();
+		contex.moveTo(200,200);
+		contex.arc(200,200,80,om,om,false);
+		contex.lineWidth = 3;
+		contex.strokeStyle = 'yellow';
+		contex.stroke();
+		
+		//时针
+		var oh = h/12*Math.PI*2-0.5*Math.PI+m/60*Math.PI*2/12;
+		contex.beginPath();
+		contex.moveTo(200,200);
+		contex.arc(200,200,85,oh,oh,false);
+		contex.lineWidth = 4;
+		contex.strokeStyle = 'green';
+		contex.stroke();
+	},1000);	
+		
+	
+		
+	</script>
+</html>
